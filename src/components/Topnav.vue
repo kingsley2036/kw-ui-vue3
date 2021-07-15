@@ -1,6 +1,6 @@
 <template>
   <div class="topnav">
-    <div class="logo">LOGO</div>
+    <div class="logo" @click="toggleVisible">LOGO</div>
     <ul class="menu">
       <li>菜单1</li>
       <li>菜单2</li>
@@ -9,8 +9,20 @@
 </template>
 
 <script>
+import {inject} from "vue";
+
 export default {
-  name: "Topnav"
+  name: "Topnav",
+  setup(){
+    const asideVisible=inject('asideVisible')
+    const  toggleVisible=()=>{
+      asideVisible.value=!asideVisible.value
+    }
+    return {
+      asideVisible,
+      toggleVisible
+    }
+  }
 }
 </script>
 
@@ -19,7 +31,8 @@ export default {
   background: pink;
   display: flex;
   padding: 16px;
-
+  position: relative;
+  z-index: 10;
   > .logo {
     max-width: 6em;
     margin-right: auto;
